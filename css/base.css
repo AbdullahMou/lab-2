@@ -1,0 +1,26 @@
+@import '/css/reset.css';
+@import '/css/module.css';
+@import '/css/layout.css';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap');
+body{
+    background-color: rgb(255, 255, 255);
+    font-family: 'Roboto Mono', monospace;
+}
+img{
+    height: 200px;
+    width: 200px;
+    /* margin-left: 50%;
+    margin-right: 50%; */
+}
+div{
+   border: 1px black ;
+   display: inline-block;
+   width: 30%;
+   height: 300px;
+   padding: 20px;
+   border-collapse: collapse;
+   box-sizing: border-box;
+   margin-left: 30px;
+
+}
