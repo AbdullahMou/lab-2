@@ -1,6 +1,8 @@
 'use strict';
-let optionArr = ['narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
+let optionArr = ['narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
 let allAnimal = [];
+
+
 function Animal(animalObj) {
     this.title = animalObj.title;
     this.keyword = animalObj.keyword;
@@ -8,36 +10,48 @@ function Animal(animalObj) {
     this.horns = animalObj.horns;
     this.image_url = animalObj.image_url;
     allAnimal.push(this);
+    // for (let element in animalObj){
+    //     this[element]=animalObj[element];
+    // }
 }
-Animal.prototype.render = function () {
+
+Animal.prototype.render = function() {
     let templete = $('.photo-template').clone();
     $('main').append(templete);
     templete.find('h2').text(this.title);
     templete.find('img').attr('src', this.image_url);
     templete.find('p').text(this.description);
     templete.removeClass('photo-template');
+    templete.attr('class', this.keyword);
+    // let myTemplate =$('templete').html();
+    // let mustache = Mustache.render(myTemplate, this);
 }
+
+
+let uniqueKeyArr = [];
+//...new Set(allAnimal)];
+// $.each(allAnimal.keyword, function(i, ele) {
+//     if ($.inArray(ele, uniqueKeyArr) === -1) uniqueKeyArr.push(el);
+// });
+optionArr.forEach((ele) => {
+    if (!uniqueKeyArr.includes(ele)) {
+        uniqueKeyArr.push(ele);
+    }
+});
+
+console.log(uniqueKeyArr);
+
+
+
 function selectItem() {
-    allAnimal.forEach(element => {
-        let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
+    uniqueKeyArr.forEach(element => {
+        let option = $(`<option value="${element}"> ${element}</option>`);
         console.log(option);
         $('select').append(option);
     });
 
 
 };
-function show_keyWord() {
-    let templete = $('.photo-template')
-    for (let l = 0; l < allAnimal.length; l++) {
-        if (this.keyword === 'narwhal') {
-
-            templete.find('img').attr('src', this.image_url).hide();
-        }
-
-        //   templete.find('img').attr('src', this.image_url).hide();
-    }
-
-}
 
 Animal.readJson = () => {
     const ajaxSettings = {
@@ -51,26 +65,22 @@ Animal.readJson = () => {
                 let animal_create = new Animal(element);
                 animal_create.render();
 
-                // let option = $(`<option value="${element.keyword}"> ${element.keyword}</option>`);
-                // console.log(element);
-                // $('select').append(option);
-
             });
             selectItem();
 
         });
 };
 $(() => Animal.readJson());
-console.log('allAnimal');
 
-console.log(allAnimal);
+$(document).ready(function() {
 
-$('select').change(element => {
-    let show = element.target.value;
-    console.log(typeof(show));
+    $('select').on('change', changeing);
 
-    $('div').css(
-        { 'display': 'none' }
-    );
-    $(`.${show}`).fadeIn(1000);
+    function changeing(event) {
+        let show = event.target.value;
+        console.log(show);
+
+        $('div').hide();
+        $(`.${show}`).fadeIn(1000);
+    };
 });
