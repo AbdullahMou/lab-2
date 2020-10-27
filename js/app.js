@@ -2,6 +2,11 @@
 let optionArr = ['narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
 let allAnimal = [];
 
+<<<<<<< HEAD
+$('<p><input type="submit"></p>').appendTo('main');
+=======
+// $('<p><input type="submit"></p>').appendTo('main');
+>>>>>>> 4fbfe949bb79c670c54d4037933f449439238e5b
 
 function Animal(animalObj) {
     this.title = animalObj.title;
@@ -17,7 +22,7 @@ function Animal(animalObj) {
 
 Animal.prototype.render = function() {
     let templete = $('.photo-template').clone();
-    $('main').append(templete);
+
     templete.find('h2').text(this.title);
     templete.find('img').attr('src', this.image_url);
     templete.find('p').text(this.description);
@@ -25,6 +30,7 @@ Animal.prototype.render = function() {
     templete.attr('class', this.keyword);
     // let myTemplate =$('templete').html();
     // let mustache = Mustache.render(myTemplate, this);
+    $('main').append(templete);
 }
 
 
@@ -70,7 +76,25 @@ Animal.readJson = () => {
 
         });
 };
+Animal.readJson2 = () => {
+    const ajaxSettings = {
+        method: 'get',
+        dataType: 'json'
+    };
+
+    $.ajax('data/page-2.json', ajaxSettings)
+        .then(data => {
+            data.forEach(element => {
+                let animal_create = new Animal(element);
+                animal_create.render();
+
+            });
+            selectItem();
+
+        });
+};
 $(() => Animal.readJson());
+$(() => Animal.readJson2());
 
 $(document).ready(function() {
 
@@ -78,7 +102,6 @@ $(document).ready(function() {
 
     function changeing(event) {
         let show = event.target.value;
-        console.log(show);
 
         $('div').hide();
         $(`.${show}`).fadeIn(1000);
