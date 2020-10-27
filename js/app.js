@@ -2,7 +2,11 @@
 let optionArr = ['narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon', 'narwhal', 'narwhal', 'triceratops', 'rhino', 'mouflon', 'lizard', 'dragon', 'unicorn', 'markhor', 'chameleon'];
 let allAnimal = [];
 
+<<<<<<< HEAD
 $('<p><input type="submit"></p>').appendTo('main');
+=======
+// $('<p><input type="submit"></p>').appendTo('main');
+>>>>>>> 4fbfe949bb79c670c54d4037933f449439238e5b
 
 function Animal(animalObj) {
     this.title = animalObj.title;
